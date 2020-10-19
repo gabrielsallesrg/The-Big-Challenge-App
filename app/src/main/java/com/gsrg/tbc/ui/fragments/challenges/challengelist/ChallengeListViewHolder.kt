@@ -1,4 +1,4 @@
-package com.gsrg.tbc.ui.fragments.challengelist
+package com.gsrg.tbc.ui.fragments.challenges.challengelist
 
 import android.view.LayoutInflater
 import android.view.View

@@ -1,7 +1,7 @@
-package com.gsrg.tbc.ui.fragments.challengelist
+package com.gsrg.tbc.ui.fragments.challenges.challengedetails
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 
-class ChallengeListViewModel
+class ChallengeDetailsViewModel
 @ViewModelInject constructor() : ViewModel()

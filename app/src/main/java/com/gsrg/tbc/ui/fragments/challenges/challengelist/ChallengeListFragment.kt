@@ -1,11 +1,13 @@
-package com.gsrg.tbc.ui.fragments.challengelist
+package com.gsrg.tbc.ui.fragments.challenges.challengelist
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.gsrg.tbc.R
 import com.gsrg.tbc.databinding.FragmentChallengeListBinding
 import com.gsrg.tbc.ui.fragments.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,8 +18,8 @@ class ChallengeListFragment : BaseFragment() {
     private lateinit var binding: FragmentChallengeListBinding
     private val viewModel: ChallengeListViewModel by viewModels()
     private val adapter = ChallengeListAdapter(fun(challenge: Boolean) {
-        //TODO navigate to the next screen
-        showMessage(binding.root, "clicked")
+        //TODO save or send some data from challenge
+        findNavController().navigate(R.id.action_challengeListFragment_to_challengeDetailsFragment)
     })
 
     override fun onCreateView(
