@@ -30,19 +30,19 @@ android {
     buildTypes {
         release {
             buildConfigField "Boolean", "MOCK_RESPONSE", "false"
-            buildConfigField "String", "LUAS_BASE_URL", "\"https://luasforecasts.rpa.ie/xml/\""
+            buildConfigField "String", "TBC_BASE_URL", "\"https://thebigachallenge.appspot.com/_ah/api/myApi/v1/\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
             buildConfigField "Boolean", "MOCK_RESPONSE", "false"
-            buildConfigField "String", "LUAS_BASE_URL", "\"https://luasforecasts.rpa.ie/xml/\""
+            buildConfigField "String", "TBC_BASE_URL", "\"https://thebigachallenge.appspot.com/_ah/api/myApi/v1/\""
             minifyEnabled false
             debuggable = true
         }
         mock {
             buildConfigField "Boolean", "MOCK_RESPONSE", "true"
-            buildConfigField "String", "LUAS_BASE_URL", "\"https://luasforecasts.rpa.ie/xml/\""
+            buildConfigField "String", "TBC_BASE_URL", "\"https://thebigachallenge.appspot.com/_ah/api/myApi/v1/\""
             minifyEnabled false
             debuggable = true
             signingConfig signingConfigs.debug
