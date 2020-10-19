@@ -21,6 +21,10 @@ class ChallengeRepository
     private val database: ITbcDatabase
 ) : IChallengeRepository {
 
+    /**
+     * Get a list of [Challenge] using the concept of
+     * Single Source of Truth (database is the source in this case)
+     */
     override fun getChallengeList(): Flow<Result<List<Challenge>>> = flow {
         emit(Result.Loading(requestChallengeListFromDB()))
         requestChallengeListFromApi()
@@ -39,6 +43,9 @@ class ChallengeRepository
             }
     }
 
+    /**
+     * Map from [Result] of [ChallengeListResponse] to [Result] of list of [Challenge]
+     */
     private fun mapChallengeListResponseToListOfResponse(response: Result<ChallengeListResponse>): Result<List<Challenge>> {
         return when (response) {
             is Result.Success -> {
@@ -59,6 +66,9 @@ class ChallengeRepository
         }
     }
 
+    /**
+     * Makes a request to [TbcApiService] to get a [ChallengeListResponse]
+     */
     private fun requestChallengeListFromApi(): Flow<Result<ChallengeListResponse>> = flow {
         emit(try {
             apiService.getChallengeList().run {
@@ -82,11 +92,17 @@ class ChallengeRepository
         })
     }
 
+    /**
+     * Clear [Challenge] Table and insert new items
+     */
     private suspend fun storeChallengeListInDB(challengeList: List<Challenge>) {
         database.challengeDao().clearTable()
         database.challengeDao().insertAll(challengeList)
     }
 
+    /**
+     * Get list of [Challenge] from DB
+     */
     private suspend fun requestChallengeListFromDB(): List<Challenge> {
         return database.challengeDao().selectAll() ?: emptyList()
     }
