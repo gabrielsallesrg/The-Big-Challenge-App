@@ -9,12 +9,10 @@ import com.gsrg.tbc.R
 
 class ChallengeListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    private val firstTextView: TextView = view.findViewById(R.id.firstTextView) //TODO give proper name to these views
-    private val secondTextView: TextView = view.findViewById(R.id.secondTextView)
+    private val descriptionTextView: TextView = view.findViewById(R.id.descriptionTextView)
 
-    fun bind(first: String, second: String) { //TODO give proper name to these parameters
-        firstTextView.text = first
-        secondTextView.text = second
+    fun bind(description: String) {
+        descriptionTextView.text = description
     }
 
     companion object {

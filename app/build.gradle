@@ -52,7 +52,7 @@ android {
 }
 
 dependencies {
-
+    implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(path: ':core')
     implementation project(path: ':domain')
     implementation project(path: ':network')
@@ -77,6 +77,8 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
+
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
     // Timber - Log
     implementation "com.jakewharton.timber:timber:$timber_version"
