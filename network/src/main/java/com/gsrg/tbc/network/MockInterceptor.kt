@@ -13,7 +13,7 @@ class MockInterceptor(private val context: Context) : Interceptor {
         if (BuildConfig.MOCK_RESPONSE) {
             val uri = chain.request().url.toUri().toString()
             val responseString = when {
-                uri.contains("goals") -> loadStringFromAssets("TODO.json")
+                uri.contains("goals") -> loadStringFromAssets("ChallengeListResponse.json")
                 else -> "{}"
             }
 
@@ -24,9 +24,9 @@ class MockInterceptor(private val context: Context) : Interceptor {
                 .message(responseString)
                 .body(
                     responseString.toByteArray()
-                        .toResponseBody("text/html".toMediaTypeOrNull())
+                        .toResponseBody("application/json".toMediaTypeOrNull())
                 )
-                .addHeader("content-type", "text/html")
+                .addHeader("content-type", "application/json")
                 .build()
         } else {
             //just to be on safe side.
