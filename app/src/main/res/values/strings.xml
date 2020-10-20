@@ -5,4 +5,9 @@
     <string name="unknown_error">Unknown Error</string>
     <string name="no_data_available">No data available</string>
     <string name="challenge_cell_text">%1s: %2s</string>
+    <string name="challenge_progress">%1d / %2d %3s</string>
+    <string name="steps">steps</string>
+    <string name="meters">meters</string>
+    <string name="congratulations">Congratulations!!!</string>
+    <string name="keep_going">Keep going...</string>
 </resources>

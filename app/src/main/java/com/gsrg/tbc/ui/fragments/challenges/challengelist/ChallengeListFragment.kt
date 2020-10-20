@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -13,6 +14,7 @@ import com.gsrg.tbc.R
 import com.gsrg.tbc.core.models.Challenge
 import com.gsrg.tbc.core.utils.Result
 import com.gsrg.tbc.databinding.FragmentChallengeListBinding
+import com.gsrg.tbc.ui.MainActivityViewModel
 import com.gsrg.tbc.ui.fragments.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.net.UnknownHostException
@@ -22,9 +24,11 @@ class ChallengeListFragment : BaseFragment() {
 
     private lateinit var binding: FragmentChallengeListBinding
     private val viewModel: ChallengeListViewModel by viewModels()
+    private val activityViewModel: MainActivityViewModel by activityViewModels()
+
     private val adapter = ChallengeListAdapter(fun(challenge: Challenge) {
-        //TODO save or send some data from challenge
-        showMessage(binding.root, challenge.title)
+        hideLoading()
+        activityViewModel.selectedChallenge = challenge
         findNavController().navigate(R.id.action_challengeListFragment_to_challengeDetailsFragment)
     })
 
