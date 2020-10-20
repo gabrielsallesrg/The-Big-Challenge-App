@@ -3,7 +3,7 @@ package com.gsrg.tbc.network.repository
 import com.gsrg.tbc.core.models.Challenge
 import com.gsrg.tbc.core.utils.Result
 import com.gsrg.tbc.core.utils.TAG
-import com.gsrg.tbc.database.ITbcDatabase
+import com.gsrg.tbc.database.challenge.ChallengeDao
 import com.gsrg.tbc.domain.api.TbcApiService
 import com.gsrg.tbc.domain.model.ChallengeListResponse
 import com.gsrg.tbc.domain.repository.IChallengeRepository
@@ -19,7 +19,7 @@ import javax.inject.Inject
 class ChallengeRepository
 @Inject constructor(
     private val apiService: TbcApiService,
-    private val database: ITbcDatabase,
+    private val challengeDao: ChallengeDao,
     private val mapper: ChallengeMapper
 ) : IChallengeRepository {
 
@@ -75,14 +75,14 @@ class ChallengeRepository
      * Clear [Challenge] Table and insert new items
      */
     private suspend fun storeChallengeListInDB(challengeList: List<Challenge>) {
-        database.challengeDao().clearTable()
-        database.challengeDao().insertAll(challengeList)
+        challengeDao.clearTable()
+        challengeDao.insertAll(challengeList)
     }
 
     /**
      * Get list of [Challenge] from DB
      */
     private suspend fun requestChallengeListFromDB(): List<Challenge> {
-        return database.challengeDao().selectAll() ?: emptyList()
+        return challengeDao.selectAll() ?: emptyList()
     }
 }
