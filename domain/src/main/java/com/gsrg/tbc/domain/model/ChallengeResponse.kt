@@ -7,6 +7,5 @@ data class ChallengeResponse(
     @field:SerializedName("title") val title: String,
     @field:SerializedName("description") val description: String,
     @field:SerializedName("type") val type: String,
-    @field:SerializedName("goal") val goal: Int,
-    @field:SerializedName("reward") val reward: RewardResponse,
+    @field:SerializedName("goal") val goal: Int
 )

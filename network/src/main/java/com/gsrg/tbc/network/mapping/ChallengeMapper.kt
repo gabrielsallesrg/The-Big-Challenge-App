@@ -18,9 +18,7 @@ class ChallengeMapper : Mapper<Result<ChallengeListResponse>, Result<List<Challe
                         title = it.title,
                         description = it.description,
                         type = it.type,
-                        goal = it.goal,
-                        rewardTrophy = it.reward.trophy,
-                        rewardPoints = it.reward.points
+                        goal = it.goal
                     )
                 })
             }
