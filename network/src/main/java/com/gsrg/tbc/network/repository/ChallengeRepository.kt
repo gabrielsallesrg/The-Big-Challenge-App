@@ -7,6 +7,7 @@ import com.gsrg.tbc.database.ITbcDatabase
 import com.gsrg.tbc.domain.api.TbcApiService
 import com.gsrg.tbc.domain.model.ChallengeListResponse
 import com.gsrg.tbc.domain.repository.IChallengeRepository
+import com.gsrg.tbc.network.mapping.ChallengeMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
@@ -18,7 +19,8 @@ import javax.inject.Inject
 class ChallengeRepository
 @Inject constructor(
     private val apiService: TbcApiService,
-    private val database: ITbcDatabase
+    private val database: ITbcDatabase,
+    private val mapper: ChallengeMapper
 ) : IChallengeRepository {
 
     /**
@@ -28,7 +30,7 @@ class ChallengeRepository
     override fun getChallengeList(): Flow<Result<List<Challenge>>> = flow {
         emit(Result.Loading(requestChallengeListFromDB()))
         requestChallengeListFromApi()
-            .map { response: Result<ChallengeListResponse> -> mapChallengeListResponseToListOfResponse(response) }
+            .map { response: Result<ChallengeListResponse> -> mapper.mapFrom(response) }
             .collect {
                 when (it) {
                     is Result.Success -> {
@@ -41,29 +43,6 @@ class ChallengeRepository
                     }
                 }
             }
-    }
-
-    /**
-     * Map from [Result] of [ChallengeListResponse] to [Result] of list of [Challenge]
-     */
-    private fun mapChallengeListResponseToListOfResponse(response: Result<ChallengeListResponse>): Result<List<Challenge>> {
-        return when (response) {
-            is Result.Success -> {
-                return Result.Success(data = response.data.items.map {
-                    Challenge(
-                        id = it.id,
-                        title = it.title,
-                        description = it.description,
-                        type = it.type,
-                        goal = it.goal,
-                        rewardTrophy = it.reward.trophy,
-                        rewardPoints = it.reward.points
-                    )
-                })
-            }
-            is Result.Error -> response
-            is Result.Loading -> Result.Error(Exception("This should never happen"))
-        }
     }
 
     /**
