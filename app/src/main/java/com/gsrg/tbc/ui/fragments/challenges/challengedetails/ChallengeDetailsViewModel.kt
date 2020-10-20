@@ -15,13 +15,14 @@ class ChallengeDetailsViewModel
 ) : ViewModel() {
 
     val stepsLiveData = MutableLiveData<Int>()
-    val distanceLiveData = MutableLiveData<Int>()
+    val walkingDistanceLiveData = MutableLiveData<Int>()
+    val runningDistanceLiveData = MutableLiveData<Int>()
 
     fun requestProgress(challengeType: String) {
-        if (challengeType == ChallengeType.TYPE_STEP) {
-            requestSteps()
-        } else {
-            requestDistance()
+        when (challengeType) {
+            ChallengeType.TYPE_STEP -> requestSteps()
+            ChallengeType.TYPE_WALKING_DISTANCE -> requestDistance()
+            ChallengeType.TYPE_RUNNING_DISTANCE -> requestRunningDistance()
         }
     }
 
@@ -35,8 +36,16 @@ class ChallengeDetailsViewModel
 
     private fun requestDistance() {
         viewModelScope.launch {
-            stepCounter.distanceInMeters().collect { meters: Int ->
-                distanceLiveData.value = meters
+            stepCounter.walkingDistanceInMeters().collect { meters: Int ->
+                walkingDistanceLiveData.value = meters
+            }
+        }
+    }
+
+    private fun requestRunningDistance() {
+        viewModelScope.launch {
+            stepCounter.runningDistanceInMeters().collect { meters: Int ->
+                runningDistanceLiveData.value = meters
             }
         }
     }

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.gsrg.tbc.BuildConfig
 import com.gsrg.tbc.R
 import com.gsrg.tbc.databinding.FragmentChallengeDetailsBinding
 import com.gsrg.tbc.ui.MainActivityViewModel
@@ -49,7 +50,11 @@ class ChallengeDetailsFragment : BaseFragment() {
             val goal = activityViewModel.selectedChallenge.goal
             updateResultViews(current = steps, goal = goal, unit = getString(R.string.steps))
         })
-        viewModel.distanceLiveData.observe(viewLifecycleOwner, { meters: Int ->
+        viewModel.walkingDistanceLiveData.observe(viewLifecycleOwner, { meters: Int ->
+            val goal = activityViewModel.selectedChallenge.goal
+            updateResultViews(current = meters, goal = goal, unit = getString(R.string.meters))
+        })
+        viewModel.runningDistanceLiveData.observe(viewLifecycleOwner, { meters: Int ->
             val goal = activityViewModel.selectedChallenge.goal
             updateResultViews(current = meters, goal = goal, unit = getString(R.string.meters))
         })
@@ -64,7 +69,7 @@ class ChallengeDetailsFragment : BaseFragment() {
 
     private fun requestProgressOrPermission() {
         val account = GoogleSignIn.getAccountForExtension(requireContext(), viewModel.fitnessOptions())
-        if (!GoogleSignIn.hasPermissions(account, viewModel.fitnessOptions())) {
+        if (!BuildConfig.MOCK_RESPONSE && !GoogleSignIn.hasPermissions(account, viewModel.fitnessOptions())) {
             GoogleSignIn.requestPermissions(
                 this,
                 FITNESS_PERMISSION,
