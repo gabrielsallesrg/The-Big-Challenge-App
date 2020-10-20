@@ -12,3 +12,9 @@ data class Challenge(
     val rewardTrophy: String,
     val rewardPoints: Int
 )
+
+object ChallengeType {
+    const val TYPE_STEP = "step"
+    const val TYPE_WALKING_DISTANCE = "walking_distance"
+    const val TYPE_RUNNING_DISTANCE = "running_distance"
+}
