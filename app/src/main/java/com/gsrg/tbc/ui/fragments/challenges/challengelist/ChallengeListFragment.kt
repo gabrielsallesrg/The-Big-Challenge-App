@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.gsrg.tbc.R
 import com.gsrg.tbc.core.models.Challenge
@@ -24,7 +25,7 @@ class ChallengeListFragment : BaseFragment() {
     private val adapter = ChallengeListAdapter(fun(challenge: Challenge) {
         //TODO save or send some data from challenge
         showMessage(binding.root, challenge.title)
-        //findNavController().navigate(R.id.action_challengeListFragment_to_challengeDetailsFragment)
+        findNavController().navigate(R.id.action_challengeListFragment_to_challengeDetailsFragment)
     })
 
     override fun onCreateView(
