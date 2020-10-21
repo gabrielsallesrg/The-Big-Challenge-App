@@ -89,17 +89,13 @@ class ChallengeDaoTest {
         title: String = "",
         description: String = "",
         type: String = "",
-        goal: Int = 0,
-        rewardTrophy: String = "",
-        rewardPoints: Int = 0
+        goal: Int = 0
     ): Challenge {
         return Challenge(
             id = id,
             title = title,
             description = description,
-            type = type, goal = goal,
-            rewardTrophy = rewardTrophy,
-            rewardPoints = rewardPoints
+            type = type, goal = goal
         )
     }
 }

@@ -3,6 +3,7 @@ package com.gsrg.tbc.database.di
 import android.content.Context
 import com.gsrg.tbc.database.ITbcDatabase
 import com.gsrg.tbc.database.TbcDatabase
+import com.gsrg.tbc.database.challenge.ChallengeDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,5 +19,11 @@ object AppModule {
     @Provides
     fun provideTbcDatabase(@ApplicationContext applicationContext: Context): ITbcDatabase {
         return TbcDatabase.getInstance(applicationContext)
+    }
+
+    @Singleton
+    @Provides
+    fun provideChallengeDao(database: ITbcDatabase): ChallengeDao {
+        return database.challengeDao()
     }
 }

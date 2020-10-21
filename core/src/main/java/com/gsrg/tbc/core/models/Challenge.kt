@@ -8,9 +8,7 @@ data class Challenge(
     val title: String,
     val description: String,
     val type: String,
-    val goal: Int,
-    val rewardTrophy: String,
-    val rewardPoints: Int
+    val goal: Int
 )
 
 object ChallengeType {
