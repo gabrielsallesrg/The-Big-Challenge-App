@@ -1,5 +1,8 @@
 # The Big Challenge App
 
+NOTE You must register an Android client underneath a Google Project in order for the Google Fit
+API to become available. More details: http://developers.google.com/fit/android/get-started
+
 ## Jetpack
 
 - ViewModel and LiveData
