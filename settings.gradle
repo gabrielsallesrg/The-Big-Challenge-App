@@ -1,2 +1,7 @@
+include ':stepcounter'
+include ':network'
+include ':domain'
+include ':database'
+include ':core'
 include ':app'
 rootProject.name = "tbc"
